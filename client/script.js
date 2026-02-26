@@ -1,4 +1,4 @@
-const API = window.location.origin;
+const API = "https://food-delivery-backend-lake.vercel.app";
 
 const dom = {
   addForm: () => document.getElementById("addOrderForm"),
