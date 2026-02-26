@@ -1,64 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Food Delivery Order Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Online Food Delivery Order Manager - Manage and assign food delivery orders." />
+  <title>Food Delivery Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <h1>Food Delivery Order Manager</h1>
 
-  <section>
-    <h2>Add Order</h2>
-    <input id="restaurantName" type="text" placeholder="Restaurant Name" />
-    <input id="itemCount" type="number" placeholder="Item Count" />
-    <select id="isPaid">
-      <option value="false">Unpaid</option>
-      <option value="true">Paid</option>
-    </select>
-    <input id="deliveryDistance" type="number" placeholder="Delivery Distance (km)" />
-    <button onclick="addOrder()">Add Order</button>
-    <p id="addMsg"></p>
-  </section>
-
-  <section>
-    <h2>Filter Orders</h2>
-    <select id="filterPaid">
-      <option value="">All</option>
-      <option value="true">Paid</option>
-      <option value="false">Unpaid</option>
-    </select>
-    <input id="filterDistance" type="number" placeholder="Max Distance (km)" />
-    <button onclick="filterOrders()">Filter</button>
-    <button onclick="loadOrders()">Show All</button>
-  </section>
-
-  <section>
-    <h2>Assign Delivery</h2>
-    <input id="assignDistance" type="number" placeholder="Max Distance (km)" />
-    <button onclick="assignDelivery()">Assign Delivery</button>
-    <p id="assignMsg"></p>
-  </section>
-
-  <section>
-    <h2>Orders</h2>
-    <div id="output">
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Restaurant</th>
-            <th>Items</th>
-            <th>Distance (km)</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="ordersBody"></tbody>
-      </table>
+  <header id="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">&#127829;</span>
+        <h1>FoodDash</h1>
+      </div>
+      <p class="tagline">Order Management System</p>
     </div>
-  </section>
+  </header>
+
+  <main id="app-main">
+
+    <section class="card" id="add-order-section">
+      <h2>Add New Order</h2>
+      <form id="addOrderForm" autocomplete="off">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="restaurantName">Restaurant Name</label>
+            <input id="restaurantName" type="text" placeholder="e.g. Pizza Palace" required />
+          </div>
+          <div class="form-group">
+            <label for="itemCount">Item Count</label>
+            <input id="itemCount" type="number" min="1" placeholder="e.g. 3" required />
+          </div>
+          <div class="form-group">
+            <label for="isPaid">Payment Status</label>
+            <select id="isPaid">
+              <option value="false">Unpaid</option>
+              <option value="true">Paid</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="deliveryDistance">Distance (km)</label>
+            <input id="deliveryDistance" type="number" min="0.1" step="0.1" placeholder="e.g. 5.2" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="addOrderBtn">Add Order</button>
+        <p id="addMsg" class="msg" role="status"></p>
+      </form>
+    </section>
+
+    <div class="controls-row">
+      <section class="card" id="filter-section">
+        <h2>Filter Orders</h2>
+        <div class="control-row">
+          <div class="form-group">
+            <label for="filterPaid">Status</label>
+            <select id="filterPaid">
+              <option value="">All</option>
+              <option value="true">Paid</option>
+              <option value="false">Unpaid</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filterDistance">Max Distance (km)</label>
+            <input id="filterDistance" type="number" min="0" step="0.1" placeholder="e.g. 10" />
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="filterBtn">Filter</button>
+            <button type="button" class="btn btn-secondary" id="showAllBtn">Show All</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="assign-section">
+        <h2>Assign Delivery</h2>
+        <div class="control-row">
+          <div class="form-group">
+            <label for="assignDistance">Max Distance (km)</label>
+            <input id="assignDistance" type="number" min="0.1" step="0.1" placeholder="e.g. 8" />
+          </div>
+          <button type="button" class="btn btn-accent" id="assignBtn">Assign Delivery</button>
+        </div>
+        <p id="assignMsg" class="msg" role="status"></p>
+      </section>
+    </div>
+
+    <section class="card" id="orders-section">
+      <div class="section-header">
+        <h2>Orders</h2>
+        <span class="order-count" id="orderCount">0 orders</span>
+      </div>
+      <div class="table-wrap">
+        <table id="ordersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Restaurant</th>
+              <th>Items</th>
+              <th>Distance</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+      </div>
+      <p id="emptyState" class="empty-state" style="display:none;">No orders found.</p>
+    </section>
+
+  </main>
+
+  <footer id="app-footer">
+    <p>&copy; 2026 FoodDash &mdash; Order Management System</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>
