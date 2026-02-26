@@ -318,7 +318,7 @@ tbody tr:hover {
   color: var(--gray-400);
   border-top: 1px solid var(--gray-200);
 }
-
+// apply's media querys in the grid
 @media (max-width: 700px) {
   .form-grid {
     grid-template-columns: 1fr;
