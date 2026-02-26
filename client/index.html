@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Delivery Order Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Food Delivery Order Manager</h1>
+
+  <section>
+    <h2>Add Order</h2>
+    <input id="restaurantName" type="text" placeholder="Restaurant Name" />
+    <input id="itemCount" type="number" placeholder="Item Count" />
+    <select id="isPaid">
+      <option value="false">Unpaid</option>
+      <option value="true">Paid</option>
+    </select>
+    <input id="deliveryDistance" type="number" placeholder="Delivery Distance (km)" />
+    <button onclick="addOrder()">Add Order</button>
+    <p id="addMsg"></p>
+  </section>
+
+  <section>
+    <h2>Filter Orders</h2>
+    <select id="filterPaid">
+      <option value="">All</option>
+      <option value="true">Paid</option>
+      <option value="false">Unpaid</option>
+    </select>
+    <input id="filterDistance" type="number" placeholder="Max Distance (km)" />
+    <button onclick="filterOrders()">Filter</button>
+    <button onclick="loadOrders()">Show All</button>
+  </section>
+
+  <section>
+    <h2>Assign Delivery</h2>
+    <input id="assignDistance" type="number" placeholder="Max Distance (km)" />
+    <button onclick="assignDelivery()">Assign Delivery</button>
+    <p id="assignMsg"></p>
+  </section>
+
+  <section>
+    <h2>Orders</h2>
+    <div id="output">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Restaurant</th>
+            <th>Items</th>
+            <th>Distance (km)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
