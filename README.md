@@ -109,7 +109,7 @@ DB_PATH=./data/orders.db
 ```
 
 ## Deployment
-
+- Live Link : https://food-delivery-order-manager-theta.vercel.app/
 - Backend is deployed on Vercel at: https://food-delivery-backend-lake.vercel.app
 - The frontend is served as static files by the backend, or can be deployed separately on any static hosting platform (GitHub Pages, Netlify, Vercel).
 
